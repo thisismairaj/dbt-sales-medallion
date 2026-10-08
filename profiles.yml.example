@@ -1,0 +1,14 @@
+# Copy to ~/.dbt/profiles.yml and fill in from your own Databricks workspace.
+# Never commit the real file - it holds a host and an access token.
+
+sales_medallion:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: main
+      schema: sales_medallion_dev
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      threads: 4

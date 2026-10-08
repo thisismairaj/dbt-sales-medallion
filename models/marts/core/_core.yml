@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: One row per customer. Point-in-time current view; customers_snapshot holds history.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+
+  - name: dim_products
+    description: One row per product.
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+
+  - name: fct_order_items
+    description: Gold, order-line grain. Built only from the *_valid intermediate models.
+    columns:
+      - name: order_item_id
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      - name: product_id
+        data_tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+
+  - name: fct_daily_sales
+    description: Gold, order_date x channel grain. Daily revenue and order counts.
+    columns:
+      - name: revenue
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0

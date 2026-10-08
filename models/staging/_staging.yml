@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Customers, cast and renamed only, same grain as the raw seed.
+    columns:
+      - name: customer_id
+        data_tests: [not_null, unique]
+
+  - name: stg_products
+    description: Products, cast and renamed only.
+    columns:
+      - name: product_id
+        data_tests: [not_null, unique]
+
+  - name: stg_orders
+    description: >
+      Raw passthrough of orders. Intentionally NOT tested for unique order_id
+      here - the seeded duplicate rows are a real defect this project
+      demonstrates catching, and the dedupe happens one layer down in
+      int_orders_deduped. Testing uniqueness here would just fail loudly
+      instead of routing the rows anywhere.
+    columns:
+      - name: order_id
+        data_tests: [not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              values: ["placed", "shipped", "delivered", "cancelled"]
+
+  - name: stg_order_items
+    description: Raw passthrough of order line items.
+    columns:
+      - name: order_item_id
+        data_tests: [not_null, unique]

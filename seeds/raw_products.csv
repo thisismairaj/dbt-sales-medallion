@@ -1,0 +1,16 @@
+product_id,product_name,category,unit_cost,unit_price
+1,Product 1,home,62.91,94.2
+2,Product 2,electronics,78.88,109.0
+3,Product 3,home,129.86,186.68
+4,Product 4,electronics,119.85,201.34
+5,Product 5,sporting_goods,60.79,111.63
+6,Product 6,electronics,81.72,177.66
+7,Product 7,office,103.64,145.42
+8,Product 8,apparel,113.88,226.82
+9,Product 9,sporting_goods,21.18,35.82
+10,Product 10,apparel,5.47,10.67
+11,Product 11,office,145.92,289.76
+12,Product 12,apparel,137.33,286.12
+13,Product 13,home,127.04,223.2
+14,Product 14,office,27.16,53.95
+15,Product 15,electronics,143.26,305.17

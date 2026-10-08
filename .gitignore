@@ -1,0 +1,11 @@
+target/
+dbt_packages/
+logs/
+.env
+
+# contains warehouse host/user/password - never committed, see profiles.yml.example
+profiles.yml
+
+# agent instructions: kept local
+/CLAUDE.md
+docs/
