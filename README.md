@@ -70,10 +70,19 @@ dataset.
 
 ## Status
 
-Scaffolded and generates its own seed data; `dbt seed` / `dbt run` / `dbt
-test` / `dbt snapshot` against a real Databricks warehouse: **NOT MEASURED
-yet** — this needs `profiles.yml` wired up (see `profiles.yml.example`) and
-hasn't been run yet in this environment.
+Run end-to-end against a real Databricks SQL warehouse (trial workspace,
+Unity Catalog `workspace`) — `dbt seed`, `dbt run`, `dbt test`, `dbt
+snapshot` all completed successfully:
+
+- **13 of 13 models** built (9 views, 4 tables)
+- **31 of 31 tests passed**, including the quarantine-rate gate
+- Of the seeded defects: **5 of 5** orphan-customer orders and **10 of 10**
+  bad-quantity/orphan-product order items landed in quarantine with a
+  reason, exactly as designed - nothing silently dropped, nothing silently
+  let through
+- Gold layer: **643 valid order-item rows**, **$290,157.21** total revenue
+  (`fct_daily_sales`)
+- `customers_snapshot` ran and recorded SCD2 history
 
 ## Running it
 
