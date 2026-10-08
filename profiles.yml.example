@@ -1,5 +1,10 @@
 # Copy to ~/.dbt/profiles.yml and fill in from your own Databricks workspace.
-# Never commit the real file - it holds a host and an access token.
+# Never commit the real file.
+#
+# Uses OAuth (auth_type: databricks-oauth) rather than a personal access
+# token - same auth method as this project's sibling repos. The first
+# command that connects opens a browser for a one-time login; dbt caches the
+# resulting token locally after that.
 
 sales_medallion:
   target: dev
@@ -10,5 +15,5 @@ sales_medallion:
       schema: sales_medallion_dev
       host: "{{ env_var('DATABRICKS_HOST') }}"
       http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
-      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      auth_type: databricks-oauth
       threads: 4

@@ -72,14 +72,17 @@ dataset.
 
 Scaffolded and generates its own seed data; `dbt seed` / `dbt run` / `dbt
 test` / `dbt snapshot` against a real Databricks warehouse: **NOT MEASURED
-yet** — this needs a Databricks SQL warehouse or cluster wired up via
-`profiles.yml` (see `profiles.yml.example`) and `DATABRICKS_HOST` /
-`DATABRICKS_HTTP_PATH` / `DATABRICKS_TOKEN` env vars, which haven't been run
-yet in this environment.
+yet** — this needs `profiles.yml` wired up (see `profiles.yml.example`) and
+hasn't been run yet in this environment.
 
 ## Running it
 
 ```bash
+pip install dbt-databricks
+cp profiles.yml.example ~/.dbt/profiles.yml   # uses OAuth, not a token - see the file
+
+# set DATABRICKS_HOST / DATABRICKS_HTTP_PATH for your workspace, then:
+dbt debug                # confirms the connection
 dbt deps                 # installs dbt_utils
 dbt seed                 # loads seeds/raw_*.csv as bronze tables
 dbt run                  # builds staging -> intermediate -> marts
